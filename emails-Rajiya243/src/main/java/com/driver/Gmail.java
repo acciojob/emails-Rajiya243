@@ -1,6 +1,10 @@
 package com.driver;
 
-import java.util.*;
+import java.util.Date;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Gmail extends Email {
 
@@ -15,10 +19,6 @@ public class Gmail extends Email {
         Inbox = new LinkedList<>();
         Trash = new LinkedList<>();
 
-    }
-    public Gmail(String emailId)
-    {
-        super(emailId);
     }
 
     public void receiveMail(Date date, String sender, String message){
