@@ -5,7 +5,7 @@ public class Email {
     private String emailId;
     private String password;
 
-    public Email(String emailId) {
+    public Email(String emailId){
         this.emailId = emailId;
         this.password = "Accio@123";
     }
@@ -18,66 +18,53 @@ public class Email {
         return password;
     }
 
-    public boolean isUpper(String newPassword) {
-        //  int []freq = new int[26];
-        for (int i = 0; i < newPassword.length(); i++) {
-            if (Character.isUpperCase(newPassword.charAt(i))) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public boolean isLower(String newPassword) {
-        for (int i = 0; i < newPassword.length(); i++) {
-            if (Character.isLowerCase(newPassword.charAt(i))) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public boolean isNumber(String newPassword) {
-        for (int i = 0; i < newPassword.length(); i++) {
-            if (Character.isDigit(newPassword.charAt(i))) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public boolean isSpecial(String newPassword) {
-        for (int i = 0; i < newPassword.length(); i++) {
-            char s = newPassword.charAt(i);
-            if (!Character.isDigit(s) && !Character.isLetter(s) && !Character.isWhitespace(s)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public void changePassword(String oldPassword, String newPassword) {
+    public void changePassword(String oldPassword, String newPassword){
         //Change password only if the oldPassword is equal to current password and the new password meets all of the following:
         // 1. It contains at least 8 characters
         // 2. It contains at least one uppercase letter
         // 3. It contains at least one lowercase letter
         // 4. It contains at least one digit
         // 5. It contains at least one special character. Any character apart from alphabets and digits is a special character
-
-        if (this.password.equals(oldPassword)) {
-            if (newPassword.length() >= 8) {
-                boolean upper = isUpper(newPassword);
-                boolean lower = isLower(newPassword);
-                boolean number = isNumber(newPassword);
-                boolean special = isSpecial(newPassword);
-                if (upper == true && lower == true && number == true && special == true) {
-                    this.password = newPassword;
-                }
+        if(this.password.equals(oldPassword)){
+            if(newPassword.length()>=8 && containsCap(newPassword) && containsSmall(newPassword) && containsNum(newPassword) && containsChar(newPassword)){
+                System.out.println("password changed.");
+            }else{
+                System.out.println("Create As per the requirements.");
             }
+        }else{
+            System.out.println("enter oldPassword correctly.");
         }
+    }
+    public boolean containsCap(String s){
+        for(int i=0;i<s.length();i++){
+            int n = (int) s.charAt(i);
+            if(n >= 65 && n <= 90)
+                return true;
+        }
+        return false;
+    }
+    public boolean containsSmall(String s){
+        for(int i=0;i<s.length();i++){
+            int n = (int) s.charAt(i);
+            if(n >= 97 && n <= 122)
+                return true;
+        }
+        return false;
+    }
+    public boolean containsNum(String s){
+        for(int i=0;i<s.length();i++){
+            int n = (int) s.charAt(i);
+            if(n >= 48 && n <= 57)
+                return true;
+        }
+        return false;
+    }
+    public boolean containsChar(String s){
+        for(int i=0;i<s.length();i++) {
+            int n = (int) s.charAt(i);
+            if((n >= 33 && n <= 47) || (n >= 58 && n <= 64) || (n >= 91 && n <= 96) || (n >= 123 && n <= 236))
+                return true;
+        }
+        return false;
     }
 }
